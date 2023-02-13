@@ -21,24 +21,18 @@ class Solution {
         // r, l을 stack에 넣음
         // stack이 empty될 때까지 loop
         if(root == null) return root;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
         
-        
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        
-        while(!stack.isEmpty()){
-            TreeNode node = stack.pop();
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
             TreeNode temp = node.left;
             node.left = node.right;
             node.right = temp;
             
-            if (node.left != null) {
-                stack.push(node.left);
-            }
-            if (node.right != null) {
-                stack.push(node.right);
-            }
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
         }
         return root;
-    }
+    }//T O(n), S O(n)
 }
