@@ -16,20 +16,24 @@ class Solution {
         1 -> 2 -> 3 -> 4 -> 5
         
         1. 연결이 끊어지면 안돼 그럼 다음 node확인이 어려워
-        2. 그럼 서로 바라보게 한 다음에 3. 둘중 한 방향의 next를 바꿔야겠다
-        4. next는 1개만 지정할 수 있으니까 next 가 null인 곳에서 시작해야함
-        5. 끝으로 가자
-        6. 가장 마지막 node, 즉 reverse List의 start가 될 node를 return한다
+        2. 방향 변경할 때 필요한 항목들을 저장해두자
+        4. 2의 방향을 변경하려면 우선 1 pre정보 필요하고, next변경한뒤에는 next 확인불가하니 next 저장필요
+        5. curr.next = pre
+        6. 변경한 다음에 pre = curr , curr = next 넣으면 되겠다 
+        7. loop 순서대로 진행한 다음에 curr.next == null 일 떄 curr return 
         */
         //4,5 번
-        ListNode startNode = reverseList(head.next);
+        ListNode pre = null;
+        ListNode curr = head;
+        ListNode next = null;
         
-        //2번 4<->5
-        head.next.next = head;
-        head.next = null;
+        while(curr != null){
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
         
-        //
-        return startNode;
-        
+        return pre;
     } // time O(n) , space O(n)
 }
