@@ -27,7 +27,7 @@ public class Solution {
         }
         
         return isCycle;
-    }
+    } // T O(N) -> 1번 순환하면서 곂치는 곳 찾음 S. O(1)
     /*
     
     
