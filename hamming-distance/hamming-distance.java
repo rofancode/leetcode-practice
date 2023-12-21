@@ -1,6 +1,6 @@
 class Solution {
     public int hammingDistance(int x, int y) {
-        //비트 서로 다름 1 * 0 = 1, 1*1 = 0, 0*0 = 0 ^
+        //비트 서로 다름 경우 cnt 1 * 0 = 1, 1*1 = 0, 0*0 = 0 ^
         int xor = x^y;
         int distance = 0;
         while(xor != 0) {
