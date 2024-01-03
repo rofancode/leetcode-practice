@@ -1,45 +1,24 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> ans = new ArrayList<>();
-        
+        Map<String, List<String>> ans = new HashMap<>();
         
         for (String str : strs) {
-            boolean hasAnagram = false;
             
-            //anagrams 확인
-            for (List<String> anagram: ans) {
-                hasAnagram = isAnagram(str, anagram.get(0));
-                if(hasAnagram){
-                    anagram.add(str);
-                    break;
-                }
-            }
-            // 없으면 추가
-            if(!hasAnagram) {
-                List<String> anagram = new ArrayList<>();
-                anagram.add(str);
-                ans.add(anagram);
-            }
-        } 
-        
-        return ans;
-        
-    }
-    
-    public boolean isAnagram(String str1, String str2) {
-        if (str1.length() != str2.length()) return false;
-        
-        int [] alph = new int [26];
-        for (int i = 0; i < str1.length(); i++) {
-            alph[str1.charAt(i) -'a']++;
-            alph[str2.charAt(i) -'a']--;
+            //anagram 확인 용 key 만들기
+            char [] count = new char[26];
+            for (char c: str.toCharArray()) count[c-'a']++;
+            String key = new String(count);
+            
+            //anagrams 확인 및 추가
+            //key에 대해 기존 값 있으면 value반환, 없으면 k-> new ArrayList 람다식 호출 반환
+            //객체에 str추가
+            ans.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
         }
+        //ans.values() 는 collection에서 제공하는 기능으로 value들을 Collection 형태로 값을 반환  
+        // Collection<List<String>
+        // ArrayList<>(Collection객체)는 Collection을 -> ArrayList<> 로 변경 
+        return new ArrayList<>(ans.values());
         
-        for (int i : alph){
-            if (i != 0) return false;
-        }
-        
-        return true;
     }
 }
 // Time O(N * N *  100) = O(N^2)
