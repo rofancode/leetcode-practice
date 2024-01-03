@@ -42,3 +42,5 @@ class Solution {
         return true;
     }
 }
+// Time O(N * N *  100) = O(N^2)
+// Space O(1)
