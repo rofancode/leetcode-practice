@@ -1,8 +1,10 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-        //  Time O(MN), Space O(M+N)
+        //  Time O(MN), Space O(M+N) extra space 
         /*
+            Space O(1)
             전체 훓으면서 0일 때 i, j 값 저장 
+            
             첫번째 열, 컬럼을 flag로 사용
             이때 0,0 의 경우 첫번째 열 혹은 컬럼에 0 이 있을 때 이 0이 컬럼의 0인지 열의 0인지 구분이 어렵다 
             -> 첫번째 열 or 컬럼 1개 기준으로 셀 확인해서 flag설정 필요
